@@ -1,0 +1,37 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: javaweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: javaweb
+  template:
+    metadata:
+      labels:
+        name: javaweb
+    spec:
+      initContainers:
+       - image: registry.gitlab.com/hireright/dexter2.0/applications/docker.scraper.images/ca_los_angeles_superior_court:39.1.20.0-20220121.123005-7
+         name: war
+         volumeMounts:
+           - mountPath: /app
+             name: app-volume
+         command:
+           - "cp"
+           - "/web_app.war"
+           - "/app"
+      containers:
+       - image: registry.gitlab.com/hireright/dexter2.0/applications/docker.scraper.tomcat-9-jre8-temurin:latest
+         name: tomcat
+         volumeMounts:
+           - mountPath: /usr/local/tomcat/webapps
+             name: app-volume
+         ports:
+           - containerPort: 8080
+      volumes:
+       - name: app-volume
+         emptyDir: {}
+      imagePullSecrets:
+        - name: regcred
