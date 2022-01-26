@@ -1,16 +1,16 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: ca_los_angeles_superior_court
+  name: ca-los-angeles-superior-court
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: ca_los_angeles_superior_court
+      name: ca-los-angeles-superior-court
   template:
     metadata:
       labels:
-        name: ca_los_angeles_superior_court
+        name: ca-los-angeles-superior-court
     spec:
       initContainers:
        - image: registry.gitlab.com/hireright/dexter2.0/applications/docker.scraper.images/ca_los_angeles_superior_court:39.1.20.0-20220121.123005-7

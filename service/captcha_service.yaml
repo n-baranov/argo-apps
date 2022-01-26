@@ -1,16 +1,16 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: captcha_service
+  name: captcha-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: captcha_service
+      name: captcha-service
   template:
     metadata:
       labels:
-        name: captcha_service
+        name: captcha-service
     spec:
       initContainers:
        - image: registry.gitlab.com/hireright/dexter2.0/applications/docker.service.images/captcha_service:38.12.29.0-20211229.102202-6
